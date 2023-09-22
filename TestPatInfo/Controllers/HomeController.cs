@@ -7,15 +7,20 @@ namespace TestPatInfo.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
+       
+
         public IActionResult Index()
         {
-            return View();
+            Tmhtc_HIS3bContext _tmh3bContext = new Tmhtc_HIS3bContext();
+            var patList = _tmh3bContext.TestPatinfo.ToList();
+
+            return View(patList);
         }
 
         public IActionResult Privacy()

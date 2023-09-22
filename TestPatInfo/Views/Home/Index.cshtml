@@ -1,8 +1,23 @@
-﻿@{
+﻿@model List<TestPatinfo>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="d-flex justify-content-center">
+    <h1>病患資料表</h1>   
 </div>
+<div class="d-flex justify-content-between">
+    <input id="searchInput" class="col-sm-3 form-control m-2" placeholder="搜尋" />
+    <button type="button" class="btn btn-outline-success m-2" data-bs-toggle="modal" data-bs-target="#newPat" >新增</button>
+
+</div>
+@*@foreach (var i in Model)
+{
+        <form action="/Home/Save" method="post">        
+            <input type="hidden" name="PatKey" value="@i.PatKey" />
+            <input type="text" name="PatName" value="@i.PatName" />
+            <input type="text" name="PatIdno" value="@i.PatIdno" />
+            <button type="submit">Save</button>
+        </form>
+}*@
+
