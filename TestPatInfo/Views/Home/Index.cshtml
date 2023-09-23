@@ -11,13 +11,30 @@
     <button type="button" class="btn btn-outline-success m-2" data-bs-toggle="modal" data-bs-target="#newPat" >新增</button>
 
 </div>
-@*@foreach (var i in Model)
-{
-        <form action="/Home/Save" method="post">        
-            <input type="hidden" name="PatKey" value="@i.PatKey" />
-            <input type="text" name="PatName" value="@i.PatName" />
-            <input type="text" name="PatIdno" value="@i.PatIdno" />
-            <button type="submit">Save</button>
-        </form>
-}*@
+<table id="patTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col" class="text-center">病歷號</th>
+            <th scope="col" class="text-center">姓名</th>
+            <th scope="col" class="text-center">身分證號</th>
+            <th scope="col" class="text-center">電話</th>
+            <th scope="col" style="display:none">電話</th>
+        </tr>
+    </thead>
 
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr class="row-click">
+                <td class="text-center"><label>@i.PatId</label></td>
+                <td class="text-center"><label>@i.PatName</label></td>
+                <td class="text-center"><label>@i.PatIdno</label></td>
+                <td class="text-center"><label>@i.PatTel</label></td>
+                <td style="display:none">
+                    <button type="button" class="show-details" data-rowid="@i.PatKey"></button>
+                </td>
+            </tr>
+            
+        }
+    </tbody>
+</table>
