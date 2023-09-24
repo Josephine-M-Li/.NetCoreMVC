@@ -2,13 +2,17 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace TestPatInfo.Models
 {
     public partial class TestPatinfo
     {
         public int PatKey { get; set; }
+
+        [Required]
         public string PatId { get; set; }
+        [Required]
         public string PatName { get; set; }
         public string PatIdno { get; set; }
         public string PatTel { get; set; }

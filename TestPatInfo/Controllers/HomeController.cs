@@ -13,14 +13,32 @@ namespace TestPatInfo.Controllers
             _logger = logger;
         }
 
-       
 
+
+        /// <summary>
+        /// 首頁
+        /// </summary> 
+        [HttpGet]
         public IActionResult Index()
         {
             Tmhtc_HIS3bContext _tmh3bContext = new Tmhtc_HIS3bContext();
             var patList = _tmh3bContext.TestPatinfo.ToList();
 
             return View(patList);
+        }
+
+        /// <summary>
+        /// 新增
+        /// </summary>  
+        [HttpPost]
+        public IActionResult CreatePat(TestPatinfo _patinfo)
+        {
+            Tmhtc_HIS3bContext _tmh3bContext = new Tmhtc_HIS3bContext();
+            _tmh3bContext.TestPatinfo.Add(_patinfo);
+            _tmh3bContext.SaveChanges();
+
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()

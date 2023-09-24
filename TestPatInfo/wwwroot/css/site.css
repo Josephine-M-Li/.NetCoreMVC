@@ -1,18 +1,87 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+﻿html {
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  margin-bottom: 60px;
+    font-family: Arial, 微軟正黑體;
+    background-repeat: repeat-x;
+    background-color: #ffffff;
+    color: #333333;
+    margin: 0px;
+    padding: 0px;
+}
+
+/*必填欄位樣式*/
+.form-group.required .control-label:after {
+    content: "*";
+    color: red;
+}
+
+
+/*欄位驗證錯誤樣式*/
+span.field-validation-error {
+    color: red;
+}
+
+.form-control-inline-inline {
+    display: inline;
+    height: calc(2.25rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    .form-control-inline {
+        transition: none;
+    }
+}
+
+/*不跳行inline控制項css*/
+.form-control-inline::-ms-expand {
+    background-color: transparent;
+    border: 0;
+}
+
+.form-control-inline:focus {
+    color: #495057;
+    background-color: #ffffff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), none;
+}
+
+.form-control-inline::-webkit-input-placeholder {
+    color: #939ba2;
+    opacity: 1;
+}
+
+.form-control-inline::-moz-placeholder {
+    color: #939ba2;
+    opacity: 1;
+}
+
+.form-control-inline:-ms-input-placeholder {
+    color: #939ba2;
+    opacity: 1;
+}
+ 
+.form-control-inline::placeholder {
+    color: #939ba2;
+    opacity: 1;
+}
+
+.form-control-inline:disabled, .form-control-inline[readonly] {
+    background-color: #e9ecef;
+    opacity: 1;
 }

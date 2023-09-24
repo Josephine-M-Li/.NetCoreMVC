@@ -8,7 +8,7 @@
 </div>
 <div class="d-flex justify-content-between">
     <input id="searchInput" class="col-sm-3 form-control m-2" placeholder="搜尋" />
-    <button type="button" class="btn btn-outline-success m-2" data-bs-toggle="modal" data-bs-target="#newPat" >新增</button>
+    <button type="button" class="btn btn-outline-success m-2" data-bs-toggle="modal" data-bs-target="#createPat">新增</button>
 
 </div>
 <table id="patTable" class="table table-striped">
@@ -18,7 +18,7 @@
             <th scope="col" class="text-center">姓名</th>
             <th scope="col" class="text-center">身分證號</th>
             <th scope="col" class="text-center">電話</th>
-            <th scope="col" style="display:none">電話</th>
+            <th scope="col" class="text-center"></th>
         </tr>
     </thead>
 
@@ -30,11 +30,120 @@
                 <td class="text-center"><label>@i.PatName</label></td>
                 <td class="text-center"><label>@i.PatIdno</label></td>
                 <td class="text-center"><label>@i.PatTel</label></td>
-                <td style="display:none">
+                <td class="text-center"><label></label></td>
+                @*<td style="display:none">
                     <button type="button" class="show-details" data-rowid="@i.PatKey"></button>
-                </td>
+                </td>*@
             </tr>
             
         }
     </tbody>
 </table>
+
+<!--Modal-->
+<div class="modal fade" id="createPat"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLable" aria-hidden="true">data-bs-backdrop="static"
+    <div class="modal-dialog">
+        <div class="modal-content ">
+            <div class="modal-header d-flex justify-content-center">
+                <h1>新增</h1>
+            </div>
+            <form id="addPat" action="/Home/CreatePat" method="post">
+                <div class="modal-body">
+                    <div class="d-flex align-items-center m-2">
+                        <label class="label">病歷號</label>
+                        <input id="newPatno" type="text" class="form-control mx-2" name="patId" />
+                    </div>
+                    <div class="d-flex align-items-center m-2">
+                        <label class="label">姓名</label>
+                        <input id="newPatName" type="text" class="form-control mx-2" name="patName" />
+                    </div>
+                    <div class="d-flex align-items-center m-2">
+                        <label class="label">身分證號</label>
+                        <input id="newPatIdno" type="text" class="form-control mx-2" name="patIdno" />
+                    </div>
+                    <div class="d-flex align-items-center m-2">
+                        <label class="label">電話</label>
+                        <input id="newPatTel" type="text" class="form-control mx-2" name="patTel" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary m-2" onclick="addPat()">儲存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@*<div class="modal" tabindex="-1" id="createPat">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+<script>
+      
+    var rows=document.querySelectorAll(".row-click");
+    rows.forEach(function (row){
+        row.addEventListener("dblclick",function(){
+       
+            var rowkey=row.querySelector(".show-details").getAttribute("data-rowid")
+
+            $.ajax({
+                type:"POST",
+                url:"/Home/EditPat",
+                data:{patKey:rowkey},
+                success:function(result){
+                    document.getElementById('newPatno').value = result.patId;
+                    document.getElementById('newPatName').value = result.patName;
+                    document.getElementById('newPatIdno').value = result.patIdno;
+                    document.getElementById('newPatTel').value = result.patTel;
+
+                    $("#createPat").modal("show");
+                },
+                error:function(){
+                    alert("開啟資料失敗")
+                }
+
+
+            });
+        });
+
+    });
+
+
+    function addPat(){
+
+        if ($("#newPatno").val() == '') {
+            debugger;
+            alert("病歷號不可為空白");
+            return;
+        }
+
+        if ($("#newPatName").val() == '') {
+            debugger;
+            alert("姓名不可為空白");
+            return;
+        }
+
+        document.getElementById("addPat").submit();
+
+    }
+
+    
+
+
+
+</script>
+
